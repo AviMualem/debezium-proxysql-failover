@@ -18,6 +18,11 @@ The deployment consists of the following components
   * Apache Kafka Connect with Debezium MySQL Connector - the connector will connect to proxy sql
 
 ## Demonstration
+loading the environment.
+```
+export DEBEZIUM_VERSION=1.8
+docker-compose up --build
+```
 
 ###creating proxy sql monitor user in mysql:
 proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because user will be replicated between mysql server 1 and mysql server 2
@@ -62,8 +67,6 @@ SAVE MYSQL USERS TO DISK;
 ### creating connector
 Start the components and register Debezium to stream changes from the database
 ```
-export DEBEZIUM_VERSION=1.8
-docker-compose up --build
 curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
 ```
 
