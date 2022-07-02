@@ -3,14 +3,14 @@
 
 
 
-# Debezium + Proxy sql failover Demo
+# Debezium + ProxySQL Failover Demo
 
 This demo aims to show Debezium failover behaviour when working with proxy sql.
 it is heavily influenced by the debezium + HA proxy demo which can be seen here:
 
 https://github.com/debezium/debezium-examples/tree/main/failover 
 
-its important to mention that the connector which will be created via the request file
+Its important to mention that the connector which will be created via the request file
 will be set to work with the proxy sql address.
 
 
@@ -41,7 +41,7 @@ docker-compose up --build
 ```
 
 ### Creating proxy sql monitor user in mysql:
-proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because
+Proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because
 user will be replicated between mysql server 1 and mysql server 2
 
 ```
@@ -56,7 +56,7 @@ GRANT USAGE ON *.* TO 'proxysql'@'%';
 FLUSH privileges;
 ```
 
-### Configure proxy sql
+### Configure ProxySQL
 
 ```
 // connect to proxy sql
