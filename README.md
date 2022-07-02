@@ -71,16 +71,19 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 messages can be seen at http://localhost:8000 in the customer topic
 
 
-### Connect to MySQL 1, check server UUID and create two records
+### Connect -directly- to MySQL 1, check server UUID and create two records
 ```
 docker-compose exec mysql1 bash -c 'mysql -u root -p$MYSQL_ROOT_PASSWORD inventory'
 
+// get the uuid of the server
   SHOW GLOBAL VARIABLES LIKE 'server_uuid';
+  
+// insert 2 new records
   INSERT INTO customers VALUES (default, 'John','Doe','john.doe@example.com');
   INSERT INTO customers VALUES (default, 'Jane','Doe','jane.doe@example.com');
   
   
- ###  Check UUID in change message, the 'source' will contain field "gtid":"50303655-f22a-11e8-92a5-0242ac1d0003:2"
+ //Check UUID in change message, the 'source' will contain the uuid that  you just queried.
 ```
 
 ### initiate a failover
@@ -89,13 +92,21 @@ Stop the mysql1 server
 ```
 docker-compose stop mysql1
 ```
-Create two more records in the mysql2 database  and check the `UUID` of the mysql2 server.
+### Connect -directly- to MySQL 2, check server UUID and create two records
+
+
+
 ```
-# Connect to MySQL 2, check server UUID and create two records
 docker-compose exec mysql2 bash -c 'mysql -u root -p$MYSQL_ROOT_PASSWORD inventory'
+
+//get the uuid of the server
   SHOW GLOBAL VARIABLES LIKE 'server_uuid';
+  
+  // insert 2 new records
   INSERT INTO customers VALUES (default, 'Peter','Doe','peter.doe@example.com');
   INSERT INTO customers VALUES (default, 'Paul','Doe','paul.doe@example.com');
+  
+   //Check UUID in change message, the 'source' will contain the uuid that  you just queried.
 ```
 
 you can see that streaming messages are now being fetched from mysqlserver 2 and messages will have the mysql2 server uuid.
