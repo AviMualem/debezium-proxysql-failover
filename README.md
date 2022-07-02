@@ -45,7 +45,7 @@ start a ssh session to the proxy sql and run the following.
 // connect to proxy sql
 //make sure you are in terminal in the folder of the compose file
 
-docker-compose exec mysql bash -c 'mysql -u admin -padmin -h 127.0.0.1 -P 6032'
+docker-compose exec proxysql bash -c 'mysql -u admin -padmin -h 127.0.0.1 -P 6032'
 
 //adding the two mysql servers to proxy sql topology
 INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (0,'mysql1',3306);
