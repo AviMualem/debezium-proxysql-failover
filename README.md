@@ -47,10 +47,10 @@ start a ssh session to the proxy sql and run the following.
 
 docker-compose exec proxysql bash -c 'mysql -u admin -padmin -h 127.0.0.1 -P 6032'
 
-//adding the two mysql servers to proxy sql topology
-INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (0,'mysql1',3306);
+//adding the two mysql servers to proxy sql topology (the 10000000 weight on mysql 1 will make sure it will function as "primary" if available) 
+INSERT INTO mysql_servers(hostgroup_id,hostname,port,weight) VALUES (0,'mysql1',3306,10000000);
 
-INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (0,'mysql2',3306);
+INSERT INTO mysql_servers(hostgroup_id,hostname,port,weight) VALUES (0,'mysql2',3306,1);
 
 //set the proxy sql monitor user we created before on mysql servers
 UPDATE global_variables SET variable_value='proxysql' WHERE variable_name='mysql-monitor_username';
