@@ -1,7 +1,12 @@
 # Debezium + Proxy sql failover Demo
 
 This demo aims to show Debezium failover behaviour when working with proxy sql.
-connector which will be created via the request file will be set to work with the proxy sql address.
+it is heavily influenced by the debezium + HA proxy demo which can be seen here:
+https://github.com/debezium/debezium-examples/tree/main/failover 
+
+its important to mention that the connector which will be created via the request file
+will be set to work with the proxy sql address.
+
 
 ## Topology
 
