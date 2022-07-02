@@ -7,6 +7,7 @@
 
 This demo aims to show Debezium failover behaviour when working with proxy sql.
 it is heavily influenced by the debezium + HA proxy demo which can be seen here:
+
 https://github.com/debezium/debezium-examples/tree/main/failover 
 
 its important to mention that the connector which will be created via the request file
