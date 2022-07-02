@@ -33,13 +33,14 @@ The deployment consists of the following components
   * Apache Kafka Connect with Debezium MySQL Connector - the connector will connect to proxy sql
 
 ## Demonstration
-loading the environment.
+
+loading the environment
 ```
 export DEBEZIUM_VERSION=1.8
 docker-compose up --build
 ```
 
-### creating proxy sql monitor user in mysql:
+### Creating proxy sql monitor user in mysql:
 proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because
 user will be replicated between mysql server 1 and mysql server 2
 
@@ -55,7 +56,7 @@ GRANT USAGE ON *.* TO 'proxysql'@'%';
 FLUSH privileges;
 ```
 
-### configure proxy sql
+### Configure proxy sql
 start a ssh session to the proxy sql and run the following.
 
 ```
@@ -66,6 +67,7 @@ docker-compose exec proxysql bash -c 'mysql -u admin -padmin -h 127.0.0.1 -P 603
 
 // adding the two mysql servers to proxy sql topology 
 // (the 10000000 weight on mysql 1 will make sure it will function as "primary" if available) 
+// you can feel free to change it to suite your needs.
 
 INSERT INTO mysql_servers(hostgroup_id,hostname,port,weight) VALUES (0,'mysql1',3306,10000000);
 
@@ -96,13 +98,13 @@ SAVE MYSQL USERS TO DISK;
 
 ```
 
-### creating connector
+### Creating connector
 Start the components and register Debezium to stream changes from the database
 ```
 curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
 ```
 
-### where can i see my messages 
+### Where can i see my messages 
 messages can be seen at http://localhost:8000 in the customer topic
 
 
@@ -123,7 +125,7 @@ docker-compose exec mysql1 bash -c 'mysql -u root -pdebezium inventory'
  // Check UUID in change message, the 'source' will contain the uuid that  you just queried.
 ```
 
-### initiate a failover
+### Initiate a failover
 
 Stop the mysql1 server
 ```
@@ -150,7 +152,7 @@ you can see that streaming messages are now being fetched from mysqlserver 2 and
 
 you are free to put any of ther servers up and down and see that debezium keeps on working as expected and able to fetch data from both servers while keeping track of GTID
 
-### how to start and stop mysql servers in order to check various failover scenarios
+### How to start and stop mysql servers in order to check various failover scenarios
 ```
 docker-compose stop mysql1
 docker-compose start mysql1
