@@ -27,7 +27,7 @@ GRANT USAGE ON *.* TO 'proxysql'@'%';
 FLUSH privileges;
 ```
 
-###configure proxy sql
+### configure proxy sql
 start a ssh session to the proxy sql and run the following.
 
 ```
@@ -68,7 +68,7 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 ```
 
 ### where can i see my messages 
-messages can be seen at localhost:8000 in the customer topic
+messages can be seen at http://localhost:8000 in the customer topic
 
 
 ### Connect to MySQL 1, check server UUID and create two records
