@@ -57,11 +57,11 @@ FLUSH privileges;
 ```
 
 ### Configure proxy sql
-start a ssh session to the proxy sql and run the following.
 
 ```
 // connect to proxy sql
 // make sure you are in terminal in the folder of the compose file
+// start a ssh session to the proxy sql by running the following:
 
 docker-compose exec proxysql bash -c 'mysql -u admin -padmin -h 127.0.0.1 -P 6032'
 
