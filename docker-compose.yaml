@@ -43,16 +43,6 @@ services:
      - MYSQL_ROOT_PASSWORD=debezium
      - MYSQL_USER=mysqluser
      - MYSQL_PASSWORD=mysqlpw
-  # mysql:
-  #   image: debezium/example-haproxy:1
-  #   build:
-  #     context: haproxy
-  #   ports:
-  #    - 3306:3306
-  #   environment:
-  #    - MYSQL_ROOT_PASSWORD=debezium
-  #    - MYSQL_USER=mysqluser
-  #    - MYSQL_PASSWORD=mysqlpw
   connect:
     image: quay.io/debezium/connect:${DEBEZIUM_VERSION}
     ports:
