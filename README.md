@@ -146,7 +146,7 @@ docker-compose start mysql2
 ```
 docker-compose down
 ```
-### script to kill all containrs :)
+### script to kill all containers :)
 ```
 docker rm -f $(docker ps -qa)
 ```
