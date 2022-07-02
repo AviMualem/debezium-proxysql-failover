@@ -129,9 +129,24 @@ docker-compose exec mysql2 bash -c 'mysql -u root -pdebezium inventory'
 
 you can see that streaming messages are now being fetched from mysqlserver 2 and messages will have the mysql2 server uuid.
 
-you are free to put any of ther servers up and down and see that debezium keeps on working as expected.
+you are free to put any of ther servers up and down and see that debezium keeps on working as expected and able to fetch data from both servers while keeping track of GTID
 
-Stop the demo
+### how to start and stop mysql servers in order to check various failover scenarios
+```
+docker-compose stop mysql1
+docker-compose start mysql1
+
+docker-compose stop mysql2
+docker-compose start mysql2
+
+
+```
+
+### Stop the demo
 ```
 docker-compose down
+```
+### script to kill all containrs :)
+```
+docker rm -f $(docker ps -qa)
 ```
