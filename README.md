@@ -19,7 +19,7 @@ The deployment consists of the following components
 
 ## Demonstration
 
-### creating proxy sql monitor user in mysql:
+###creating proxy sql monitor user in mysql:
 proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because user will be replicated between mysql server 1 and mysql server 2
 ```
 CREATE USER 'proxysql'@'%' IDENTIFIED WITH mysql_native_password by '$3Kr$t';
@@ -27,7 +27,7 @@ GRANT USAGE ON *.* TO 'proxysql'@'%';
 FLUSH privileges;
 ```
 
-### configure proxy sql
+###configure proxy sql
 start a ssh session to the proxy sql and run the following.
 
 ```
@@ -65,14 +65,22 @@ Start the components and register Debezium to stream changes from the database
 export DEBEZIUM_VERSION=1.8
 docker-compose up --build
 curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" http://localhost:8083/connectors/ -d @register-mysql.json
+```
 
-# Connect to MySQL 1, check server UUID and create two records
+### where can i see my messages 
+messages can be seen at localhost:8000 in the customer topic
+
+
+### Connect to MySQL 1, check server UUID and create two records
+```
 docker-compose exec mysql1 bash -c 'mysql -u root -p$MYSQL_ROOT_PASSWORD inventory'
+
   SHOW GLOBAL VARIABLES LIKE 'server_uuid';
   INSERT INTO customers VALUES (default, 'John','Doe','john.doe@example.com');
-
-# Check UUID in change message, the 'source' will contain field "gtid":"50303655-f22a-11e8-92a5-0242ac1d0003:2"
   INSERT INTO customers VALUES (default, 'Jane','Doe','jane.doe@example.com');
+  
+  
+ ###  Check UUID in change message, the 'source' will contain field "gtid":"50303655-f22a-11e8-92a5-0242ac1d0003:2"
 ```
 
 ### initiate a failover
