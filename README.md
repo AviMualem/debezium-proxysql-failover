@@ -21,7 +21,7 @@ The deployment consists of the following components
 loading the environment.
 ```
 export DEBEZIUM_VERSION=1.8
-docker-compose up --build
+docker-compose up
 ```
 
 ### creating proxy sql monitor user in mysql:
