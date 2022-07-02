@@ -1,6 +1,6 @@
 version: '2'
 services:
-  mysql:
+  proxysql:
     image: proxysql/proxysql:latest
     ports:
       - 3306:3306
