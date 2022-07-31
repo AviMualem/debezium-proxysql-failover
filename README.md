@@ -41,7 +41,7 @@ docker-compose up --build
 ```
 
 ### Creating proxy sql monitor user in mysql:
-Proxy sql rquires monitoring user to be confiured in mysql,  you can create in in one of the mysql servers because
+Proxy sql requires monitoring user to be configured in mysql, you can create in in one of the mysql servers because
 user will be replicated between mysql server 1 and mysql server 2
 
 ```
